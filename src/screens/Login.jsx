@@ -7,15 +7,15 @@ import { useSelector } from 'react-redux';
 import { useAppSelector } from '../hooks/store';
 
 const LoginScreen = ({navigation}) => {
-  const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
-  const [ secureTextEntry, setSecureTextEntry ] = useState(true);
   
   const userAuth = useSelector((state) => state.userAuth);
   const setting = useAppSelector((state) => state.settings);
 
   const onLogin = () => {
-    if(setting.pin !== null) {
+    console.log(setting);
+    setPassword('')
+    if(setting !== null) {
       if (setting.pin === password) {
         navigation.navigate('Home')
       } else {
@@ -30,46 +30,29 @@ const LoginScreen = ({navigation}) => {
     <ScrollView>
     <View style={styles.containerMain}>
       <View style={styles.containerLogo}>
-      <Image
-        source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7lAPuoHrir3zg3pPyloaeqJTyHz86aap828iyaWBQOx_mmv-MEDMlVbF4sTJ-om22nis&usqp=CAU' }}
-        style={styles.image}
-      />
-        <Text style={styles.title}>Konachcoin</Text>
+        <Text style={styles.title}>Enter Pin</Text>
       </View>
       <View style={styles.container}>
-        <TextInput
-          placeholder='Email'
-          keyboardType='email-address'
-          autoCapitalize='none'
-          value={username}
-          onChangeText={(username) => setUsername(username)}
-        />
 
         <TextInput
-          placeholder='Password'
+          label=''
+          placeholder='Enter Pin'
           keyboardType='numeric'
-          secureTextEntry={secureTextEntry}
+          secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
         />
-        {/* <TouchableOpacity style={styles.forgotPasswordContainer} onPress={() => setSecureTextEntry(!secureTextEntry)}>
+        {/* <TouchableOpacity style= Register forgotPasswordContainer} onPress={() => setSecureTextEntry(!secureTextEntry)}>
           <Text style={styles.forgotPasswordText}>Ver contraseña</Text>
         </TouchableOpacity> */}
 
         <TouchableOpacity style={styles.loginButton} onPress={() => onLogin() }>
-          <Text style={styles.loginButtonText}>Login</Text>
+          <Text style={styles.loginButtonText}>Unlook</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.forgotPasswordContainer}>
-          <Text style={styles.forgotPasswordText}>Or login with</Text>
+        <TouchableOpacity style={styles.forgotRegisterContainer} onPress={() => {  navigation.navigate('Login') } }>
+          <Text style={styles.forgotRegisterText}>Forgot Pin?</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.loginButtonGoogle}>
-          <Text style={styles.loginButtonGoogleText}>Google</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.forgotPasswordContainer}>
-          <Text style={styles.forgotPasswordText}>Forgot password?</Text>
-        </TouchableOpacity>
       </View>
     </View>
     </ScrollView>
@@ -147,7 +130,7 @@ const styles = StyleSheet.create({
   loginButtonGoogleText: {
     color: '#3b82f6',
     textAlign: 'center',
-    fontWeight: 'bold',
+    fontWeight: 'bold', 
   },
   forgotPasswordContainer: {
     marginTop: 10,
@@ -155,6 +138,18 @@ const styles = StyleSheet.create({
   forgotPasswordText: {
     color: '#8d7f7f',
   },
+
+  forgotRegisterContainer: {
+    marginTop: 16,
+  },
+  forgotRegisterText: {
+    color: '#3b3be5',
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+
+  
+
 });
 
 export default LoginScreen;

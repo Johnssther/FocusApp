@@ -1,4 +1,4 @@
-import { Expense, deleteExpenseById, storeExpense, storeAllExpenses } from '../redux/expenses/slice';
+import { Expense, deleteExpenseById, storeExpense, storeAllExpenses } from '../redux/sliders/expenses/slice';
 import { useAppDispatch, useAppSelector } from './store';
 
 export const useExpensesActions = () => {

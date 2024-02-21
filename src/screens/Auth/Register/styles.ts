@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from "../../utils/common";
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from "../../../utils/common";
 
 const styles = StyleSheet.create({
   container: {

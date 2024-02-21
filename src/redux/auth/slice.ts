@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { Expense } from "../sliders/expenses/slice";
 
 export interface UserAuth {
   id: string,
@@ -6,6 +7,7 @@ export interface UserAuth {
   username: string,
   password: string,
   auth: boolean,
+  access_token: string,
 }
 
 const initialState: UserAuth = {
@@ -14,9 +16,10 @@ const initialState: UserAuth = {
   username: 'johnssther',
   password: '123123',
   auth: true,
+  access_token: '',
 }
 
-export const userAuthSlice = createSlice({
+export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
@@ -25,14 +28,14 @@ export const userAuthSlice = createSlice({
 
     },
 
-    /* Login User */
-    loginUser: (state, action) => {
-
+    /* LoginUser */
+    loginUser: (state, action: PayloadAction<UserAuth>) => {      
+      return { ...action.payload}
     },
     
   }
 });
 
-export default userAuthSlice.reducer;
+export default authSlice.reducer;
 
-export const { showUser, loginUser } =  userAuthSlice.actions;
+export const { showUser, loginUser } =  authSlice.actions;

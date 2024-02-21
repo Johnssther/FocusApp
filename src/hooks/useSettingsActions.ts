@@ -1,4 +1,4 @@
-import { setPin } from '../redux/settings/slice';
+import { setPin } from '../redux/sliders/settings/slice';
 import { useAppDispatch } from './store';
 import { Pin } from '../@types/Setting';
 

@@ -3,7 +3,7 @@ import { TextInput as RNTextInput, TextInputProps, View, Text } from 'react-nati
 import styles from './styles';
 
 interface Props extends TextInputProps {
-  label: string;
+  label?: string;
   placeholder: string;
   secureTextEntry?: boolean;
   keyboardType?: 'default' | 'email-address' | 'numeric' | 'phone-pad';

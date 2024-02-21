@@ -36,30 +36,6 @@ const requestReadPermission = async () => {
   }
 };
 
-// Llama a esta función en algún lugar de tu código para solicitar el permiso.
-
-const requestWritePermission = async () => {
-  try {
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-      {
-        title: 'Permiso de escritura en almacenamiento externo',
-        message: 'La aplicación necesita permiso para escribir en el almacenamiento externo.',
-        buttonNeutral: 'Preguntar más tarde',
-        buttonNegative: 'Cancelar',
-        buttonPositive: 'OK',
-      },
-    );
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log('Permiso de escritura en almacenamiento externo concedido');
-    } else {
-      console.log('Permiso de escritura en almacenamiento externo denegado');
-    }
-  } catch (err) {
-    console.warn(err);
-  }
-};
-
 const ExportToCSV = ({navigation}: any) => {
   const [ namefile, setNamefile ] = useState<string>('');
 
@@ -97,61 +73,12 @@ const ExportToCSV = ({navigation}: any) => {
     }
   };
 
+
   const importCSV = async () => {
     try {
       const result = await DocumentPicker.pick();
-      
-      console.log(result);
-      
-     
-
-
-      // Get the content of the selected file
-
-      console.log( res.pickDirectory );
-      
-
-
-      // Actualizar el estado con los datos CSV
-    } catch (error) {
-      console.error('Error al importar el archivo CSV:', error);
-    }
-  };
-
-  const _importFromDownloads = async () => {
-    try {
-      const hasPermission = await PermissionsAndroid.check(
-        PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE
-      );
-  
-      if (!hasPermission) {
-        // Si no tienes permisos, solicita permisos
-        await requestReadPermission();
-      }
-      
-      const filename = namefile;
-
-      const downloadsDir = RNFS.DownloadDirectoryPath;
-      
-      const filePath = `${downloadsDir}/${filename}.csv`;
-
-      const fileExists = await RNFS.exists(filePath);
-      if (fileExists) {
-        Alert.alert(`El archivo CSV ya existe en la carpeta de descargas:`, `${filePath}`);
-      } else {
-        Alert.alert(`El archivo CSV NO EXISTE:`, `${filePath}`);
-      }
-
-      console.log(filePath, '------');
-
-
-      const csvData = await RNFS.readFile(filePath, 'utf8');
-      // Aquí puedes procesar los datos del archivo CSV como desees
-      // console.log('Datos del archivo CSV:', convertCSVDataToExpenseObjects(csvData) );
-
-
+      const csvData = await RNFS.readFile(result[0].uri, 'utf8');
       const expenses = convertCSVDataToExpenseObjects(csvData);
-
 
       Alert.alert(
         'Desea importar desde el archivo CSV',
@@ -179,13 +106,13 @@ const ExportToCSV = ({navigation}: any) => {
         { cancelable: false }
       );
 
+    
 
+      // Actualizar el estado con los datos CSV
     } catch (error) {
-      console.error('Error al importar datos desde el archivo CSV:', error);
-      Alert.alert('Error', 'Error al importar datos desde el archivo CSV, verifique que exista el nombre del archivo');
+      console.error('Error al importar el archivo CSV:', error);
     }
   };
-
 
   const convertCSVDataToExpenseObjects = (csvData: string): Expense[] => {
     const rows: string[] = csvData.split('\n');
@@ -227,7 +154,7 @@ const ExportToCSV = ({navigation}: any) => {
 
       <Text></Text>
 
-      <Button label='Import Data To CSV' onPress={() => importCSV()}></Button>
+      <Button label='importCSV Pick' onPress={() => importCSV()}></Button>
 
     </View>
     </>

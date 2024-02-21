@@ -5,14 +5,15 @@ import { formatDateHuman } from '../../utils/utils';
 
 import { useAppSelector } from '../../hooks/store';
 
-const IndexExpensesScreen = ({navigation}) => {
+const IndexExpensesScreen = ({navigation}: any) => {
   const expenses = useAppSelector((state) => state.expenses);
-
+  console.log(expenses);
+  
   const handleItemClick = (expenseId: number) => {
     navigation.navigate('ShowExpenseScreen', { expenseId })
   }
 
-  const total = (array:any) => {
+  const total = (array:any = []) => {
     return array.reduce((accumulator, currentValue) => {
       return accumulator + currentValue.totalPrice;
     }, 0);

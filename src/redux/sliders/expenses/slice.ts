@@ -36,14 +36,14 @@ export const expenseSlice = createSlice({
   initialState,
   reducers: {
     
-    /* Store Expense */
+    /* Store All Expenses */
     storeAllExpenses: (state, action: PayloadAction<Expense[]>) => {  
       // return [...state, ...action.payload];
       return action.payload;
     },
 
         
-    /* Store Expense */
+    /* Store One Expense */
     storeExpense: (state, action: PayloadAction<Expense>) => {      
       return [ ...state, { ...action.payload} ]
     },
