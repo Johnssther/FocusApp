@@ -22,11 +22,13 @@ const RegisterScreen = ({navigation}:any) => {
         password,
       }
 
-      createUser(user)
-
-      // Aquí puedes manejar la respuesta del servidor
+      const result = await createUser(user)
+      // if (result.error.status === 'FETCH_ERROR') {
+      //   Alert.alert('Ha ocurrido un error', 'Espere un momento mientras lo solucionamos');
+      // } else {
+      // }
       navigation.navigate('Login')
-  
+
     } catch (error) {
       console.log(error, 'Error');
     }

@@ -14,28 +14,6 @@ import { useExpensesActions } from '../../hooks/useExpensesActions';
 import { generateUniqueId } from '../../utils/common'
 
 
-const requestReadPermission = async () => {
-  try {
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-      {
-        title: 'Permiso de lectura en almacenamiento externo',
-        message: 'La aplicación necesita permiso para leer en el almacenamiento externo.',
-        buttonNeutral: 'Preguntar más tarde',
-        buttonNegative: 'Cancelar',
-        buttonPositive: 'OK',
-      },
-    );
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log('Permiso de lectura en almacenamiento externo concedido');
-    } else {
-      console.log('Permiso de lectura en almacenamiento externo denegado');
-    }
-  } catch (err) {
-    console.warn(err);
-  }
-};
-
 const ExportToCSV = ({navigation}: any) => {
   const [ namefile, setNamefile ] = useState<string>('');
 
@@ -139,25 +117,25 @@ const ExportToCSV = ({navigation}: any) => {
   
 
   return (
-    <>
     <View style={styles.container}>
+      <View style={styles.items}>
+        <Text style={styles.title}>Export Data</Text>
+        <TextInput
+          label='Name Export File'
+          placeholder='Input NameFile'
+          autoCapitalize='none'
+          onChangeText={(namefile) => {setNamefile(namefile)}}
+          returnKeyType="next" 
+        />
+        <Button label='Export Data To CSV' onPress={() => _exportToDownloads()}></Button>
+      </View>
 
-    <TextInput
-        label='Name Export File'
-        placeholder='Input NameFile'
-        autoCapitalize='none'
-        onChangeText={(namefile) => {setNamefile(namefile)}}
-        returnKeyType="next" 
-      />
+      <View style={styles.items}>
+        <Text style={styles.title}>Import Data</Text>
 
-      <Button label='Export Data To CSV' onPress={() => _exportToDownloads()}></Button>
-
-      <Text></Text>
-
-      <Button label='importCSV Pick' onPress={() => importCSV()}></Button>
-
+        <Button label='importCSV Pick' onPress={() => importCSV()}></Button>
+      </View>
     </View>
-    </>
   );
 };
 

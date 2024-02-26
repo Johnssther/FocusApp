@@ -2,8 +2,9 @@ import * as React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Icon from 'react-native-vector-icons/AntDesign';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import Icon from 'react-native-vector-icons/AntDesign';
 
 import LoginPinScreen from '../screens/Login';
 import ExpenseScreen from '../screens/Expense';
@@ -14,6 +15,7 @@ import RegisterScreen from '../screens/Auth/Register/RegisterScreen';
 import LoginScreen from '../screens/Auth/Login/LoginScreen';
 
 import HomeScreen from '../screens/Home/HomeScreen';
+import MenuScreen from '../screens/Menu/MenuScreen';
 
 import IndexExpensesScreen from '../screens/Expenses/IndexExpensesScreen';
 import CreateExpenseScreen from '../screens/Expenses/CreateExpenseScreen';
@@ -23,8 +25,45 @@ import SettingScreen from '../screens/Settings/SettingScreen';
 
 import ExportToCSV from '../screens/Csv/ExportCsv';
 
-
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function MyTabsHome() {
+  return (
+      <Tab.Navigator initialRouteName="CreateExpenseScreen">
+       <Tab.Screen 
+        name="IndexExpensesScreen" 
+        component={IndexExpensesScreen} 
+        options={{
+          title: 'List Expenses',
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="home" size={30} color="#000" />
+          ),
+        }}
+      />
+       <Tab.Screen 
+        name="CreateExpenseScreen" 
+        component={CreateExpenseScreen} 
+        options={{
+          title: 'Create Expense',
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="plus" size={30} color="#000" />
+          ),
+        }}
+      />
+      <Tab.Screen 
+        name="Menu" 
+        component={MenuScreen} 
+        options={{
+          title: 'Menu',
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="setting" size={30} color="#000" />
+          ),
+        }}
+      />
+      </Tab.Navigator>
+  );
+}
 
 function Rutas() {
   return (
@@ -46,7 +85,7 @@ function Rutas() {
           component={RegisterScreen}
           options={{ title: 'Register' }}
         />
-        <Stack.Screen name="Home" component={HomeScreen} options={{ headerBackVisible: false }}/>
+        <Stack.Screen name="Home" component={MyTabsHome} options={{ headerBackVisible: true, headerShown: false  }}/>
 
         <Stack.Screen
           name="IndexExpensesScreen"
@@ -85,11 +124,11 @@ function Rutas() {
          <Stack.Screen
           name="ExportToCSVs"
           component={ExportToCSV}
-          options={{ title: 'Export To CSV' }}
+          options={{ title: 'Export/Import To CSV' }}
         />
         
       </Stack.Navigator>
-    </NavigationContainer>
+    </NavigationContainer> 
   );
 }
 

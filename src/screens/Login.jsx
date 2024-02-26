@@ -39,6 +39,7 @@ const LoginScreen = ({navigation}) => {
           placeholder='Enter Pin'
           keyboardType='numeric'
           secureTextEntry={true}
+          value={password}
           onChangeText={(password) => setPassword(password)}
         />
         {/* <TouchableOpacity style= Register forgotPasswordContainer} onPress={() => setSecureTextEntry(!secureTextEntry)}>

@@ -49,6 +49,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 50,
     marginTop: 12,
+    flexDirection: 'row',
+    gap: 10,
     justifyContent: 'center', // Centrado vertical
     alignItems: 'center', // Centrado horizontal
   },

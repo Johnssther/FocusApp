@@ -1,15 +1,14 @@
 import { StyleSheet } from "react-native";
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from "../../utils/common";
+import COLORS from "../../Constants/Colors";
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  card: {
     justifyContent: 'flex-start',
     alignItems: 'center',
-    padding: 20,
-    backgroundColor:'white',
-    width: SCREEN_WIDTH,
-    height: SCREEN_HEIGHT,
+    paddingVertical: 15,
+    paddingHorizontal: 12,
+    backgroundColor:COLORS.slate[200],
+    borderRadius: 10,
   },
   text: {
     fontSize: 22,

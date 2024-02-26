@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Alert, Image, ScrollView } from 'react-native';
 import TextInput from "../../../components/TextInput/TextInput";
 import styles from './styles';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 import { useAppSelector } from '../../../hooks/store';
 
@@ -54,6 +55,7 @@ const LoginScreen = ({navigation}:any) => {
         </TouchableOpacity> */}
 
         <TouchableOpacity style={styles.loginButton} onPress={() => onLogin() }>
+          <Icon name="logout" size={23} color="#fff" />
           <Text style={styles.loginButtonText}>Login</Text>
         </TouchableOpacity>
 
